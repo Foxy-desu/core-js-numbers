@@ -211,17 +211,13 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  let arr = 0;
-  if (n > 1) {
-    for (let i = 1; i <= n; i += 1) {
+  if (n > 1 && Number.isInteger(n)) {
+    for (let i = 2; i <= n - 1; i += 1) {
       if (n % i === 0) {
-        arr += 1;
+        return false;
       }
     }
-    if (arr === 2) {
-      return true;
-    }
-    return false;
+    return true;
   }
   return false;
 }
@@ -241,10 +237,10 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (Number.isInteger(parseInt(value, 10))) return value;
+  return def;
 }
-
 /**
  * Returns the cube of the given number.
  *
@@ -256,8 +252,8 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -288,8 +284,13 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  if (n < 2) return 1;
+  let numbersArr = [];
+  for (let i = 1; i <= n; i += 1) {
+    numbersArr = [...numbersArr, i];
+  }
+  return numbersArr.reduce((acc, current) => acc + current);
 }
 
 /**
